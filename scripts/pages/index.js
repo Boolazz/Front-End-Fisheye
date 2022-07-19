@@ -1,4 +1,19 @@
     async function getPhotographers() {
+
+        fetch('./data/photographers.json', { mode : 'no-cors' })
+        .then(function(res) {
+            console.log(res);
+            //return res.json();
+        })
+        .then((data) => {
+            console.log(data.photographers);
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+
+
+
         // Penser à remplacer par les données récupérées dans le json
         const photographers = [
             {
