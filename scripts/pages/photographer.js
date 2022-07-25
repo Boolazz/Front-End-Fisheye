@@ -1,3 +1,4 @@
+//======== RÉCUPÉRATION DES DONNÉES PHOTOGRAPHES JSON ========
 async function getPhotographers() {
   
     await fetch('./data/photographers.json', {mode : 'cors'})
@@ -8,6 +9,7 @@ async function getPhotographers() {
     };
 }
 
+//======== RÉCUPÉRATION DES DONNÉES MEDIA JSON ========
 async function getMedia() {
 
     await fetch('./data/photographers.json')
@@ -17,4 +19,16 @@ async function getMedia() {
     return {
         media : [...media]
     };
+}
+
+//======== AFFICHAGE DES PHOTOS DE LA PAGE PHOTOGRAPHERS ========
+async function displayDataGalery(media) {
+    const photographersGalerySection = document.querySelector('.photographerGalery');
+    media.foreach(itemMedia => {
+        if(urlIdPhotographer === itemMedia.photographerID) {
+            const photographersGaleryModel = photographerMediaFactory(itemMedia);
+            const userGaleryCardDOM = photographerGaleryModel.gatGaleryCardDom();
+            photographersGalerySection.appendChild(userGaleryCardDOM);
+        }
+    });
 }
