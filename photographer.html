@@ -1,36 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/photographer.css">
     <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="icon" type="image/png" href="assets/icons/Vector.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
+    <script src="https://kit.fontawesome.com/37896c872a.js" crossorigin="anonymous"></script>
+    <title>Fisheye page photographe</title>
   </head>
   <body>
-    <header>
-      <img src="assets/images/logo.png" class="logo" />
+    <header class="container">
+      <a href="index.html">
+        <img src="assets/images/logo.png" class="logo" alt="logo fisheye"/>
+      </a>
     </header>
-    <main id="main">
-      <div class="photograph-header">
+    <main id="main" aria-hidden="false">
+      <div class="photograph-header container">
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
+
+      <!----------------- DROPDOWN SELECT ----------------->
+
+      <div class="select-group">
+
+        <h2 class="select-text">Trier par</h2>
+        <button id="button" class="btn-sort" aria-haspopup="listbox" aria-expanded="false">
+          <span id="select-label" class="btn-text">Popularité</span>
+          <div id="arrow" class="btn-arrow"></div>
+        </button>  
+
+        <fieldset class="dropdown hidden" id="dropdown" role="listbox">
+          <legend class="select-legend">Choissir de trier par:</legend>
+          <input type="radio" id="popularite" value="date" class="option" role="button">
+          <label for="popularite" class="select-item" tabindex="0">Popularité</label>
+          <input type="radio" id="date"value="date" class="option" role="button">
+          <label for="date" class="select-item"tabindex="0">Date</label> 
+          <input type="radio" id="title"value="title" class="option" role="button">
+          <label for="title" class="select-item"tabindex="0">Titre</label>
+        </fieldset> 
+
+      </div>
+      
+      <div class="photographerGalery"></div>
+      <div class="total-like-content" aria-label="total des likes et tarif journalier"></div>
+      
+      <!--------------------- LIGHTBOX ------------------->
+
+      <div class="lightboxContainer" role="dialog" aria-hidden="true" aria-label="ligthbox">
+        <div class="lightboxContent">
+          <button class="close" aria-label="fermer"></button>
+          <button class="slide slide-next" aria-label="photo suivante"></button>
+          <button class="slide slide-prev" aria-label="photo précédente"></button>
+          <div class="lightbox-img"></div>
+        </div>
+      </div>
     </main>
-    <div id="contact_modal">
-			<div class="modal">
+
+    <!--------------------- FORMULAIRE ------------------->
+
+    <div role="dialog" id="contact_modal" aria-hidden="true" aria-label="boite de dialogue pour contacter le photographe" tabindex="1">
+			<div class="modal" aria-labelledby="contactez-moi">
 				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <h2 id="contactez-moi">Contactez-moi</h2>
+          <label for="cross" class="cross_label">Bouton de fermeture de la fenêtre contact</label>
+          <input type="image" src="assets/icons/close.svg" onclick="closeModal()" alt="cross" id="cross" aria-label="Bouton de fermeture de la fenêtre contact"/>
         </header>
 				<form>
 					<div>
-						<label>Prénom</label>
-						<input />
+						<label for="prenom">Prénom</label>
+						<input type="text" name="first" id="prenom" placeholder="Prénom"/>
+            <span class="error-message">Veuillez mentionner votre prénom</span>
 					</div>
-          <button class="contact_button">Envoyer</button>
+					<div>
+						<label for="nom">Nom</label>
+						<input type="text" name="last" id="nom" placeholder="Nom"/>
+            <span class="error-message">Veuillez mentionner votre nom</span>
+					</div>
+					<div>
+						<label for="email">Email</label>
+						<input type="email" name="email" id="email" placeholder="monemail@gmail.com"/>
+            <span class="error-message">Veuillez entrer un email du type : monemail@gmail.com</span>
+					</div>
+					<div>
+						<label for="message">Votre message</label>
+						<textarea name="message" id="message" cols="30" rows="10"></textarea>
+					</div>
+          <button type="submit" class="contact_button" id="submit_button">Envoyer</button>
 				</form>
 			</div>
-		</div>
+    </div>
     <script src="/scripts/utils/contactForm.js"></script>
+    <script src="/scripts/pages/photographer.js"></script>
+    <script src="/scripts/factories/photographerMedia.js"></script>
+    <script src="/scripts/utils/lightbox.js"></script>
   </body>
 </html>
