@@ -197,45 +197,81 @@ function setSelectTitle(e) {
 
 // ======================= FONCTION DE TRIE DU SELECT ===========================
 
-// eslint-disable-next-line no-unused-vars
-function sort() {
+async function displayDataGaleryzer(media) {
+	const photographersGalerySection = document.querySelector(".photographerGalery");
+	let articles = `<div class="photographerGalery container">`;
+	media.forEach(itemMedia => {
+		articles += `<article class="photographerGalery__item">
+		<div class="photographerGalery__item-img">`
+		if (itemMedia.video !== undefined)
+			articles += `<video class="imgGalery" src="assets/photos/${itemMedia.photographerId}/${itemMedia.video}" alt="Tricks in te air"></video>`
+		else
+			articles += `<img class="imgGalery" src="assets/photos/${itemMedia.photographerId}/${itemMedia.image}" alt="Horseshoe" tabindex="0">`
+		
+		articles += `</div>
+		<div></div>
+		<div class="photographerGalery__item-info">
+			<h2 class="title-photo" tabindex="0">${itemMedia.title}</h2>
+			<div class="photographerGalery__item-info--like">
+				<span class="photographerGalery__item-info--Nblike" id="${itemMedia.id}" tabindex="0" aria-label="nombre de likes">${itemMedia.likes}</span>
+				<i class="fas fa-heart" id="${itemMedia.id}" tabindex="0" aria-label="coeur pour ajouter un like" aria-hidden="true"></i>
+			</div>
+		</div>
+		</article>`
+	});
+	articles += '</div>';
+	photographersGalerySection.outerHTML = articles;
+}
 
-	function switchData(Element){
-		switch (Element) {
-		case "Popularité": {
+async function getMedia(value) {     
+	await fetch("./data/photographers.json")
+		.then((res) => res.json())
 			// eslint-disable-next-line no-undef
-			media.sort((a, b) => b.likes - a.likes);
-		}
-			break;
-		case "Date": {
-			// eslint-disable-next-line no-undef
-			media.sort((a, b) => new Date(a.date) - new Date(b.date));
-		}
-			break;
-		case "Titre": {
-			// eslint-disable-next-line no-undef
-			media.sort((a, b) => {
-				if (a.title < b.title) { return -1; }
-			});
-		}
-			break;
-		}
-	}
+		.then((data) => {
+			mediazer = data.media;
+			mediazer = mediazer.filter(
+				function(mediazer) {
+					return mediazer.photographerId === urlIdPhotographer;
+				}
+			)
+			console.log(mediazer);
+			if (value === 'date') 
+				displayDataGaleryzer(sortByDate(mediazer));
+			if (value === 'likes')
+				displayDataGaleryzer(sortByLike(mediazer));
+			if (value === 'title')
+				displayDataGaleryzer(sortByTitle(mediazer));
+		});
+}
+
+
+function sortByDate(mediazer) {
+	return mediazer.sort((a, b) => new Date(a.date) - new Date(b.date));
+}
+
+function sortByLike(mediazer) {
+	return mediazer.sort((a, b) => b.likes - a.likes);
+}
+
+function sortByTitle(mediazer) {
+	return mediazer.sort((a, b) => {
+		if (a.title < b.title) { return -1; }
+	});
+}
+
+function sort() {
 
 	options.forEach((option) => {
 	
 		option.addEventListener("click", (e) => {
-			setSelectTitle(e);
-			const labelElement = document.querySelector(`label[for="${e.target.id}"]`).textContent;
-			photographerGalery.innerHTML = "";
-			
-			switchData(labelElement);
-			// eslint-disable-next-line no-undef
-			displayDataGalery(media);
-			// eslint-disable-next-line no-undef
-			Lightbox.init();
+			const value = e.target.value
+			getMedia(value);
+			toggleHidden();
 		});
-	});	
+
+	});
+
+
 
 	for(let item of selectItems) {
 		item.addEventListener("keydown", (e) => {
