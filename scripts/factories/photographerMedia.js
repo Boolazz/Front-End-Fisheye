@@ -223,7 +223,8 @@ async function displayDataGaleryzer(media) {
 	photographersGalerySection.outerHTML = articles;
 }
 
-async function getMedia(value) {     
+async function getMedia(value) {  
+	let dropDownTitle    
 	await fetch("./data/photographers.json")
 		.then((res) => res.json())
 			// eslint-disable-next-line no-undef
@@ -237,10 +238,13 @@ async function getMedia(value) {
 			console.log(mediazer);
 			if (value === 'date') 
 				displayDataGaleryzer(sortByDate(mediazer));
+				dropDownTitle = 'Date';
 			if (value === 'likes')
 				displayDataGaleryzer(sortByLike(mediazer));
+				dropDownTitle = 'Popularité';
 			if (value === 'title')
 				displayDataGaleryzer(sortByTitle(mediazer));
+				dropDownTitle = 'Titre';
 		});
 }
 
@@ -267,16 +271,22 @@ function sort() {
 			const value = e.target.value
 			getMedia(value);
 			toggleHidden();
+			setSelectTitle(e);
+			const labelElement = document.querySelector(`label[for="${e.target.id}"]`).textContent;
+			photographerGalery.innerHTML = "";
+			toggleHidden();
+			
+			switchData(labelElement);
+			// eslint-disable-next-line no-undef
+			displayDataGalery(media);
+			// eslint-disable-next-line no-undef
+			Lightbox.init();
 		});
-
-	});
-
-
+	});	
 
 	for(let item of selectItems) {
 		item.addEventListener("keydown", (e) => {
 			const itemTexContent = item.textContent;
-			
 			if(e.key === "Enter") {
 				photographerGalery.innerHTML = "";
 				selectLabel.innerText = e.target.textContent;
