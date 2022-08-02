@@ -13,7 +13,7 @@ async function getPhotographers() {
 }
 
 //============== RECUPERATION DES DONNEES JSON "MEDIA" ===================
-async function getMedia() {       
+async function getMediaA() {      
 	await fetch("./data/photographers.json")
 		.then((res) => res.json())
 		// eslint-disable-next-line no-undef
@@ -53,7 +53,7 @@ async function displayDataPhotographer(photographers) {
 async function init() {
 	// Récupère les datas des photographes
 	const { photographers } = await getPhotographers();
-	const { media } = await getMedia();
+	const { media } = await getMediaA();
 	displayDataGalery(media);
 	displayDataPhotographer(photographers);
 	// eslint-disable-next-line no-undef
