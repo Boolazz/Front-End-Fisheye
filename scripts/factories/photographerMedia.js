@@ -1,18 +1,17 @@
-// ======== RECUPERATION DE L'ID DES PHOTOGRAPHES DANS L'URL ========
+// RECUPERATION DE L'ID DES PHOTOGRAPHES DANS L'URL
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const urlIdPhotographer = parseInt(urlParams.get("id"));
 
-// =============== VARIABLES POUR CALCUL DES LIKES ======================
+// DECLARATION DES VARIABLES POUR LE CALCUL DE LIKES
 
 const totalLike = document.createElement("span");
 const arrayLikes = [];
 let likesSum = 0;
 
-// ======== FONCTION CREATION DES INFOS DE PROFIL DE LA PAGE PHOTOGRAPHER ==========
+// FONCTIONS POUR CREER LA SECTION INFORMATION PHOTOGRAPHE DE LA PAGE DE PROFIL DES PHOTOGRAPHES
 
-// eslint-disable-next-line no-unused-vars
 function photographerHeaderPage(photographer) {
 	const photographerHeader = document.querySelector(".photograph-header");
 	const {
@@ -34,9 +33,8 @@ function photographerHeaderPage(photographer) {
 	return photographerHeader;
 }
 
-// =============== FONCTION CREATION DE LA GALERIE PHOTO DES PHOTOGRAPHES ====================
+// FONCTIONS POUR CREER LA GALERIE PHOTO DES PAGES DE PROFIL DES PHOTOGRAPHES
 
-// eslint-disable-next-line no-unused-vars
 function photographerMediaFactory(data) {
 	const {
 		id, photographerId, title, image, likes, video
@@ -48,7 +46,7 @@ function photographerMediaFactory(data) {
 		const photographerArticle = document.createElement("article");
 		photographerArticle.classList.add("photographerGalery__item");
 
-		// =============== CREATION PARAGRAPHE CONTENANT NOM DE LA PHOTO ===============
+		// AFFICHAGE DU NOM DE LA PHOTO
 
 		const photographerArticleInfos = document.createElement("div");
 		photographerArticleInfos.classList.add("photographerGalery__item-info");
@@ -58,7 +56,7 @@ function photographerMediaFactory(data) {
 		photographerArticleTitle.setAttribute("tabindex", "0");
 		photographerArticleInfos.appendChild(photographerArticleTitle);
 
-		// =============== CREATION SPAN CONTENANT LE NOMBRE DE LIKES ===================
+		// AFFICHAGE DU NOMBRE DE LIKE
 
 		const photographArticleLike = document.createElement("div");
 		photographArticleLike.classList.add("photographerGalery__item-info--like");
@@ -71,7 +69,7 @@ function photographerMediaFactory(data) {
 		photographArticleLike.appendChild(photographerArticleNbLike);
 		photographerArticleInfos.appendChild(photographArticleLike);
 
-		// ================ CREATION DE L'ICONE COEUR ======================================
+		// AFFICHAGE DE L'ICONE COEUR
 
 		const photographArticleHeart = document.createElement("i");
 		photographArticleHeart.className = "fas fa-heart";
@@ -80,7 +78,7 @@ function photographerMediaFactory(data) {
 		photographArticleHeart.setAttribute("aria-label", "coeur pour ajouter un like");
 		photographArticleLike.appendChild(photographArticleHeart);
 
-		// ============== CONDITION POUR L'AFFICHAGE DES IMAGES OU VIDEOS ======================
+		// CONDITIONS D'AFFICHAGE DE PHOTO OU VIDEO
 
 		const photographerArticleImg = document.createElement("div");
 		const photographerArticleVideo = document.createElement("div");
@@ -92,7 +90,7 @@ function photographerMediaFactory(data) {
 			photographerArticleVideo.innerHTML = `<video class="imgGalery" src="assets/photos/${photographerId}/${video}" alt="${title}"/>`;
 		}
 
-		// ==================== AJOUT DES LIKES AU CLICK SUR LE COEUR ===============
+		// AJOUT DE LIKE
 
 		photographArticleHeart.addEventListener("click", plusOne);
 		photographArticleHeart.addEventListener("keydown", removeListenerKeyDown);
@@ -122,13 +120,12 @@ function photographerMediaFactory(data) {
 	return { getGaleryCardDom };
 }
 
-// ================= FONCTION CALCUL DU TOTAL DES LIKES ET AFFICHAGE DU PRIX ============================
+// ONGLET NOMBRE DE LIKE ET PRIX
 
-// eslint-disable-next-line no-unused-vars
 function getTotalLike(data, photographers) {
 	const totalLikeContent = document.querySelector(".total-like-content");
 
-	// ============= CREATION DIV ET SON CONTENU: TOTAL LIKES + COEUR ==================
+	// CREATION DIV ET SON CONTENU
 
 	const likesHeart = document.createElement("div");
 	likesHeart.className = "likes-heart";
@@ -139,7 +136,7 @@ function getTotalLike(data, photographers) {
 	heart.className = "fas fa-heart";
 	likesHeart.appendChild(heart);
 
-	// ================== RECUPERATION DES VALEURS LIKES DANS UN TABLEAU ====================
+	// RECUPERATION DES VALEURS LIKES 
 
 	for (const mediaItem of data) {
 		if (urlIdPhotographer === mediaItem.photographerId) {
@@ -148,14 +145,14 @@ function getTotalLike(data, photographers) {
 			arrayLikes.push(numberLikes);
 		}
 	}
-	// =================== CALCUL ET INSERTION DU TOTAL DES LIKES DANS SPAN ==================
+	// CALCUL ET AFFICHAGEDU TOTAL DES LIKES 
 
 	for (let i = 0; i < arrayLikes.length; i++) {
 		likesSum += arrayLikes[i];
 	}
 	totalLike.innerHTML = likesSum;
 
-	// ================= CREATION ET AFFICHAGE PRIX/JOUR PHOTOGRAPHE ====================
+	// CREATION ET AFFICHAGE PRIX/JOUR PHOTOGRAPHE 
 
 	const addPrice = document.createElement("span");
 	addPrice.setAttribute("aria-label", "tarif journalier de la prestation du photographe");
@@ -168,7 +165,7 @@ function getTotalLike(data, photographers) {
 	}
 }
 
-// ======================= FONCTIONNALITE DU SELECT ===========================
+// FONCTIONNALITES DU FILTRE
 
 const button = document.querySelector("#button");
 const selectDropdown = document.querySelector("#dropdown");
@@ -195,7 +192,7 @@ function setSelectTitle(e) {
 	toggleHidden();
 }
 
-// ======================= FONCTION DE TRIE DU SELECT ===========================
+// FONCTION DE TRI DU FILTRE
 
 async function displayDataGaleryzer(media) {
 	const photographersGalerySection = document.querySelector(".photographerGalery");
@@ -227,7 +224,6 @@ async function getMedia(value) {
 	let dropDownTitle    
 	await fetch("./data/photographers.json")
 		.then((res) => res.json())
-			// eslint-disable-next-line no-undef
 		.then((data) => {
 			mediazer = data.media;
 			mediazer = mediazer.filter(
@@ -277,9 +273,7 @@ function sort() {
 			toggleHidden();
 			
 			switchData(labelElement);
-			// eslint-disable-next-line no-undef
 			displayDataGalery(media);
-			// eslint-disable-next-line no-undef
 			Lightbox.init();
 		});
 	});	
@@ -291,12 +285,8 @@ function sort() {
 				photographerGalery.innerHTML = "";
 				selectLabel.innerText = e.target.textContent;
 				toggleHidden();
-
 				switchData(itemTexContent);
-				
-				// eslint-disable-next-line no-undef
 				displayDataGalery(media);
-				// eslint-disable-next-line no-undef
 				Lightbox.init();
 			}
 		});	

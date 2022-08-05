@@ -1,37 +1,31 @@
-//============ RECUPERATION DES DONNEES JSON "PHOTOGRAPHERS" ============
+// COMMANDE FETCH DES DONNEES DES PHOTOGRAPHES
 async function getPhotographers() {
         
 	await fetch("./data/photographers.json")
 		.then((res) => res.json())
-		// eslint-disable-next-line no-undef
 		.then((data) => (photographers = data.photographers));
 
 	return {
-		// eslint-disable-next-line no-undef
 		photographers: [...photographers]            
 	};
 }
 
-//============== RECUPERATION DES DONNEES JSON "MEDIA" ===================
+// COMMANDE FETCH DES DONNEES MEDIAS
 async function getMediaA() {      
 	await fetch("./data/photographers.json")
 		.then((res) => res.json())
-		// eslint-disable-next-line no-undef
 		.then((data) => (media = data.media));
     
 	return {
-		// eslint-disable-next-line no-undef
 		media : [...media]
 	};            
 }
 
-//=================== AFFICHAGE DE LA GALERIE PHOTO DE LA PAGE PHOTOGRAPHER =================
+// AFFICHAGE DE LA GALERIE PHOTO DANS LES PAGES DE PROFIL DES PHOTOGRAPHES
 async function displayDataGalery(media) {
 	const photographersGalerySection = document.querySelector(".photographerGalery");
 	media.forEach(itemMedia => {
-		// eslint-disable-next-line no-undef
 		if(urlIdPhotographer === itemMedia.photographerId) {
-			// eslint-disable-next-line no-undef
 			const photographerGaleryModel = photographerMediaFactory(itemMedia);
 			const userGaleryCardDOM = photographerGaleryModel.getGaleryCardDom();
 			photographersGalerySection.appendChild(userGaleryCardDOM);       
@@ -39,34 +33,25 @@ async function displayDataGalery(media) {
 	});
 }
 
-//==================== AFFICHAGE DES PROFILS DE LA PAGE PHOTOGRAPHER ====================
+// AFFICHAGE DES PROFILS DE LA PAGE PHOTOGRAPHER 
 async function displayDataPhotographer(photographers) {
 	photographers.forEach(photographer => {
-		// eslint-disable-next-line no-undef
 		if(urlIdPhotographer === photographer.id) {
-			// eslint-disable-next-line no-undef
 			photographerHeaderPage(photographer);
 		}
 	});
 }
 
 async function init() {
-	// Récupère les datas des photographes
 	const { photographers } = await getPhotographers();
 	const { media } = await getMediaA();
 	displayDataGalery(media);
 	displayDataPhotographer(photographers);
-	// eslint-disable-next-line no-undef
 	getTotalLike(media, photographers);
-	// eslint-disable-next-line no-undef
 	validate();
-	// eslint-disable-next-line no-undef
 	Lightbox.init();
-	// eslint-disable-next-line no-undef
-	// sortPhoto(media);
-	// eslint-disable-next-line no-undef
 	trapFocus(modal);  
-	// eslint-disable-next-line no-undef
+
 	sort();
 }
 init();
