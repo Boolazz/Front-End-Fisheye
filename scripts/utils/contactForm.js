@@ -10,7 +10,6 @@ const errorMessage = document.querySelectorAll("span");
 
 let firstNameValue, lastNameValue, emailValue, messageValue;
 
-// eslint-disable-next-line no-unused-vars
 function displayModal() {
 	const crossCloseModal = document.querySelector("#contact_modal input");
 	modal.style.display = "block";
@@ -30,14 +29,14 @@ function closeModal() {
 		main.setAttribute("aria-hidden", "false");
 	}
 }
-// =================== FERMETURE MODALE AVEC TOUCHE ECHAP =====================
+// FERMETURE MODALE AVEC TOUCHE ECHAP 
 window.addEventListener("keyup", (e) => {
 	if (modal.getAttribute("aria-hidden") === "false" && e.key === "Escape") {
 		closeModal();
 	}
 });
 
-// ============== VALIDATION FIRST NAME ============
+// VALIDATION FIRST NAME 
 form.first.addEventListener("change", function () {
 	validFirstName(this);
 });
@@ -55,7 +54,7 @@ const validFirstName = function (inputFirstName) {
 	return false;
 };
 
-// ============= VALIDATION LAST NAME ==================
+// VALIDATION LAST NAME 
 form.last.addEventListener("change", function () {
 	validLastName(this);
 });
@@ -72,7 +71,7 @@ const validLastName = function (inputLastName) {
 	return false;
 };
 
-// ============= VALIDATION EMAIL ==================
+// VALIDATION EMAIL
 form.email.addEventListener("change", function () {
 	validEmail(this);
 });
@@ -90,7 +89,7 @@ const validEmail = function (inputEmail) {
 	return false;
 };
 
-// ============= VALIDATION MESSAGE ==================
+// VALIDATION MESSAGE 
 form.message.addEventListener("change", function () {
 	validMessage(this);
 });
@@ -103,7 +102,7 @@ const validMessage = function (inputMessage) {
 	false;
 };
 
-// ============== VIDAGE DES CHAMPS ===========
+// VIDAGE DES CHAMPS
 function clearForm() {
 	firstName.value = null;
 	lastName.value = null;
@@ -111,8 +110,7 @@ function clearForm() {
 	text.value = null;
 }
 
-// =============== VALIDATION DES CHAMPS ET AFFICHAGE DES VALEURS DANS LA CONSOLE ===============
-// eslint-disable-next-line no-unused-vars
+// VALIDATION DES CHAMPS ET AFFICHAGE DES VALEURS DANS LA CONSOLE 
 function validate() {
 	btn.addEventListener("click", (e) => {
 		e.preventDefault();
@@ -132,8 +130,7 @@ function validate() {
 	});
 }
 
-// =================== GARDE LE FOCUS DANS LA MODALE =====================
-// eslint-disable-next-line no-unused-vars
+// GARDE LE FOCUS DANS LA MODALE
 function trapFocus(modal) {
 	const focusableEls = modal.querySelectorAll("input, textarea, button");
 	const firstFocusableEl = focusableEls[0];

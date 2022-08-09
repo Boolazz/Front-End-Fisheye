@@ -2,7 +2,6 @@ const boxImg = document.querySelector(".lightbox-img");
 const dom = document.querySelector(".lightboxContainer");
 const mainContent = document.getElementById("main");
 
-// eslint-disable-next-line no-unused-vars
 class Lightbox {
 	static init() {
 		const lightboxImg = Array.from(document.querySelectorAll(".imgGalery"));
