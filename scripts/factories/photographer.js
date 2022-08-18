@@ -1,6 +1,6 @@
 // CREATION DE L'AFFICHAGE DES PHOTOGRAPHES DANS LA PAGE D'ACCUEIL
 function photographerFactory(data) {
-	const { name, portrait, city, country, tagline, price, id } = data;
+	const { name, portrait, city, country, tagline, price, id } = data; //Comment ca s'appelle ? destructuring 
 	const picture = `assets/photographers/${portrait}`;
     
 	function getUserCardDOM() {

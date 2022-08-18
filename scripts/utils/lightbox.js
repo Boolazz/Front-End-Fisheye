@@ -3,7 +3,7 @@ const dom = document.querySelector(".lightboxContainer");
 const mainContent = document.getElementById("main");
 
 class Lightbox {
-	static init() {
+	static init() { //static ?
 		const lightboxImg = Array.from(document.querySelectorAll(".imgGalery"));
 		const gallery = lightboxImg.map((img) => img.getAttribute("src"));
 		const altAttribute = lightboxImg.map((img) => img.getAttribute("alt"));

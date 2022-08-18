@@ -13,7 +13,7 @@ let firstNameValue, lastNameValue, emailValue, messageValue;
 function displayModal() {
 	const crossCloseModal = document.querySelector("#contact_modal input");
 	modal.style.display = "block";
-	crossCloseModal.focus();
+	crossCloseModal.focus(); // focus ?
 	document.body.classList.add("stop_scrolling");
 	if (modal.hasAttribute("aria-hidden") && main.hasAttribute("aria-hidden")) {
 		modal.setAttribute("aria-hidden", "false");

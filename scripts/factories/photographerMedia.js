@@ -1,8 +1,8 @@
 // RECUPERATION DE L'ID DES PHOTOGRAPHES DANS L'URL
 
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-const urlIdPhotographer = parseInt(urlParams.get("id"));
+const queryString = window.location.search; // récupère l'url entre le ? et le #
+const urlParams = new URLSearchParams(queryString); // qu'est-ce que URLserachparam ? recuperer tous les parametres
+const urlIdPhotographer = parseInt(urlParams.get("id")); // qu'est-ce que parseint ? transofme les string en nombre
 
 // DECLARATION DES VARIABLES POUR LE CALCUL DE LIKES
 
@@ -15,7 +15,7 @@ let likesSum = 0;
 function photographerHeaderPage(photographer) {
 	const photographerHeader = document.querySelector(".photograph-header");
 	const {
-		name, portrait, city, country, tagline
+		name, portrait, city, country, tagline //comment s'appelle cette méthode ?
 	} = photographer;
 	const divPhotographerProfile = document.createElement("div");
 	divPhotographerProfile.classList.add("photographerProfile");
@@ -26,7 +26,7 @@ function photographerHeaderPage(photographer) {
 	photographerPortraitContainer.classList.add("photographer-portrait-container");
 	const photographerPortrait = document.createElement("img");
 	photographerPortrait.setAttribute("src", `assets/photographers/${portrait}`);
-	photographerPortrait.setAttribute("alt", "");
+	photographerPortrait.setAttribute("alt", `Photo de profil de ${name}`);
 	photographerPortraitContainer.appendChild(photographerPortrait);
 	photographerHeader.appendChild(photographerPortraitContainer);
 	photographerHeader.appendChild(divPhotographerProfile);
@@ -37,7 +37,7 @@ function photographerHeaderPage(photographer) {
 
 function photographerMediaFactory(data) {
 	const {
-		id, photographerId, title, image, likes, video
+		id, photographerId, title, image, likes, video // comment s'apelle cette methode
 	} = data;
 	function getGaleryCardDom() {
 		const photographerGalerySection = document.querySelector(".photographerGalery");
@@ -111,7 +111,7 @@ function photographerMediaFactory(data) {
 			photographArticleHeart.removeEventListener("click", plusOne);		
 		}
 
-		photographerArticle.appendChild(photographerArticleImg);
+		photographerArticle.appendChild(photographerArticleImg); 
 		photographerArticle.appendChild(photographerArticleVideo);
 		photographerArticle.appendChild(photographerArticleInfos);
 
