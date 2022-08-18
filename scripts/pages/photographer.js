@@ -1,3 +1,7 @@
+const queryString = window.location.search; // récupère l'url entre le ? et le #
+const urlParams = new URLSearchParams(queryString); // qu'est-ce que URLserachparam ? recuperer tous les parametres
+const urlIdPhotographer = parseInt(urlParams.get("id")); // qu'est-ce que parseint ? transofme les string en nombre
+
 // COMMANDE FETCH DES DONNEES DES PHOTOGRAPHES
 async function getPhotographers() {
         
@@ -34,6 +38,7 @@ async function displayDataGalery(media) {
 }
 
 // AFFICHAGE DES PROFILS DE LA PAGE PHOTOGRAPHER 
+
 async function displayDataPhotographer(photographers) {
 	photographers.forEach(photographer => {
 		if(urlIdPhotographer === photographer.id) {
