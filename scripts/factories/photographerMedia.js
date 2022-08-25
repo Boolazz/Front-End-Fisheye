@@ -264,10 +264,24 @@ function sort () {
       photographerGalery.innerHTML = ''
       toggleHidden()
 
-      switchData(labelElement)
       displayDataGalery(media)
       Lightbox.init()
     })
+
+    const popularity = document.getElementById('popularite');
+    popularity.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+      const value = e.target.value
+      getMedia(value)
+      toggleHidden()
+      setSelectTitle(e)
+      const labelElement = document.querySelector(`label[for="${e.target.id}"]`).textContent
+      photographerGalery.innerHTML = ''
+      toggleHidden()
+
+      displayDataGalery(media)
+      Lightbox.init()
+    }})
   })
 
   for (const item of selectItems) {
@@ -277,7 +291,6 @@ function sort () {
         photographerGalery.innerHTML = ''
         selectLabel.innerText = e.target.textContent
         toggleHidden()
-        switchData(itemTexContent)
         displayDataGalery(media)
         Lightbox.init()
       }
