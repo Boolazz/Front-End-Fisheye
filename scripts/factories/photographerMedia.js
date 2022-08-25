@@ -221,7 +221,7 @@ async function getMedia (value) {
   await fetch('./data/photographers.json')
     .then((res) => res.json())
     .then((data) => {
-      mediazer = data.media
+      let mediazer = data.media
       mediazer = mediazer.filter(
         function (mediazer) {
           return mediazer.photographerId === urlIdPhotographer
@@ -246,7 +246,9 @@ function sortByLike (mediazer) {
 }
 
 function sortByTitle (mediazer) {
+  /* eslint-disable */
   return mediazer.sort((a, b) => {
+    /* eslint-enable */
     if (a.title < b.title) { return -1 }
   })
 }

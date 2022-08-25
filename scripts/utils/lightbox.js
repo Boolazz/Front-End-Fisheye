@@ -11,7 +11,7 @@ class Lightbox {
     lightboxImg.forEach((img) => {
       img.addEventListener('click', (e) => {
         e.preventDefault()
-        new Lightbox(e.currentTarget.getAttribute('src'), e.currentTarget.getAttribute('alt'), gallery, altAttribute)
+        new Lightbox(e.currentTarget.getAttribute('src'), e.currentTarget.getAttribute('alt'), gallery, altAttribute)// eslint-disable-line no-new
         document.body.classList.add('stop_scrolling')
         dom.setAttribute('aria-hidden', 'false')
         mainContent.setAttribute('aria-hidden', 'true')
@@ -22,7 +22,7 @@ class Lightbox {
       img.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault()
-          new Lightbox(e.currentTarget.getAttribute('src'), e.currentTarget.getAttribute('alt'), gallery, altAttribute)
+          new Lightbox(e.currentTarget.getAttribute('src'), e.currentTarget.getAttribute('alt'), gallery, altAttribute)// eslint-disable-line no-new
           document.body.classList.add('stop_scrolling')
           dom.setAttribute('aria-hidden', 'false')
           mainContent.setAttribute('aria-hidden', 'true')

@@ -77,7 +77,9 @@ form.email.addEventListener('change', function () {
 })
 
 const validEmail = function (inputEmail) {
+  /* eslint-disable */
   const emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g')
+  /* eslint-enable */
   if (emailRegExp.test(inputEmail.value)) {
     emailValue = inputEmail.value
     email.classList.remove('error')
@@ -98,8 +100,9 @@ const validMessage = function (inputMessage) {
   if (inputMessage.value !== 0) {
     messageValue = inputMessage.value
     return true
-  }
-  false
+/* eslint-disable */
+  } else false
+/* eslint-enable */
 }
 
 // VIDAGE DES CHAMPS
