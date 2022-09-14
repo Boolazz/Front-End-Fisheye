@@ -145,7 +145,7 @@ function getTotalLike (data, photographers) {
       arrayLikes.push(numberLikes)
     }
   }
-  // CALCUL ET AFFICHAGEDU TOTAL DES LIKES
+  // CALCUL ET AFFICHAGE DU TOTAL DES LIKES
 
   for (let i = 0; i < arrayLikes.length; i++) {
     likesSum += arrayLikes[i]
