@@ -6,7 +6,7 @@ const email = document.querySelector('[name=email]')
 const text = document.querySelector('[name=message]')
 const modal = document.getElementById('contact_modal')
 const main = document.getElementById('main')
-const errorMessage = document.querySelectorAll('span')
+const errorMessage = document.querySelectorAll('span.error-message')
 
 let firstNameValue, lastNameValue, emailValue, messageValue
 
@@ -29,6 +29,7 @@ function closeModal () {
     main.setAttribute('aria-hidden', 'false')
   }
 }
+
 // FERMETURE MODALE AVEC TOUCHE ECHAP
 window.addEventListener('keyup', (e) => {
   if (modal.getAttribute('aria-hidden') === 'false' && e.key === 'Escape') {
@@ -97,11 +98,11 @@ form.message.addEventListener('change', function () {
 })
 
 const validMessage = function (inputMessage) {
-  if (inputMessage.value !== 0) {
+  if (inputMessage.value.length !== 0) {
     messageValue = inputMessage.value
     return true
 /* eslint-disable */
-  } else false
+  } else return false
 /* eslint-enable */
 }
 

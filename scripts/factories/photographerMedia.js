@@ -1,8 +1,8 @@
 // RECUPERATION DE L'ID DES PHOTOGRAPHES DANS L'URL
 
 const queryString = window.location.search // récupère l'url entre le ? et le #
-const urlParams = new URLSearchParams(queryString) // qu'est-ce que URLserachparam ? recuperer tous les parametres
-const urlIdPhotographer = parseInt(urlParams.get('id')) // qu'est-ce que parseint ? transofme les string en nombre
+const urlParams = new URLSearchParams(queryString) // recuperer tous les parametres
+const urlIdPhotographer = parseInt(urlParams.get('id')) // transofme les string en nombre
 
 // DECLARATION DES VARIABLES POUR LE CALCUL DE LIKES
 
@@ -15,7 +15,7 @@ let likesSum = 0
 function photographerHeaderPage (photographer) {
   const photographerHeader = document.querySelector('.photograph-header')
   const {
-    name, portrait, city, country, tagline // comment s'appelle cette méthode ?
+    name, portrait, city, country, tagline 
   } = photographer
   const divPhotographerProfile = document.createElement('div')
   divPhotographerProfile.classList.add('photographerProfile')
@@ -37,7 +37,7 @@ function photographerHeaderPage (photographer) {
 
 function photographerMediaFactory (data) {
   const {
-    id, photographerId, title, image, likes, video // comment s'apelle cette methode
+    id, photographerId, title, image, likes, video 
   } = data
   function getGaleryCardDom () {
     const photographerGalerySection = document.querySelector('.photographerGalery')
@@ -199,7 +199,8 @@ async function displayDataGaleryzer (media) {
   media.forEach(itemMedia => {
     articles += `<article class="photographerGalery__item">
 		<div class="photographerGalery__item-img">`
-    if (itemMedia.video !== undefined) { articles += `<video class="imgGalery" src="assets/photos/${itemMedia.photographerId}/${itemMedia.video}" alt="Tricks in te air"></video>` } else { articles += `<img class="imgGalery" src="assets/photos/${itemMedia.photographerId}/${itemMedia.image}" alt="Horseshoe" tabindex="0">` }
+    if (itemMedia.video !== undefined) { articles += `<video class="imgGalery" src="assets/photos/${itemMedia.photographerId}/${itemMedia.video}" alt="Tricks in te air"></video>` } 
+    else { articles += `<img class="imgGalery" src="assets/photos/${itemMedia.photographerId}/${itemMedia.image}" alt="${itemMedia.title}" tabindex="0">` }
 
     articles += `</div>
 		<div></div>
@@ -217,7 +218,7 @@ async function displayDataGaleryzer (media) {
 }
 
 async function getMedia (value) {
-  let dropDownTitle
+  let dropDownTitle 
   await fetch('./data/photographers.json')
     .then((res) => res.json())
     .then((data) => {
