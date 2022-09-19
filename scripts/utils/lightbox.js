@@ -91,16 +91,23 @@ class Lightbox {
     mainContent.setAttribute('aria-hidden', 'false')
   }
 
+// FONCTION DE PHOTO SUIVANTE
+
   next (e) {
     e.preventDefault()
     let indexUrl = this.images.findIndex((image) => image === this.url)
     let indexAlt = this.attributes.findIndex((attribute) => attribute === this.alt)
-    if (indexUrl === this.images.length - 1) {
+
+    if (indexUrl == this.images.length -1) {
       indexUrl = 0
       indexAlt = 0
+      this.loadImage(this.images[indexUrl], this.attributes[indexAlt])
     }
-    this.loadImage(this.images[indexUrl + 1], this.attributes[indexAlt + 1])
+    
+    else this.loadImage(this.images[indexUrl + 1], this.attributes[indexAlt + 1])
   }
+
+// FONCTION PHOTO PRÉCÉDENTE
 
   prev (e) {
     e.preventDefault()
